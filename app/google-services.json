@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "549186325856",
+    "firebase_url": "https://avahackathon18.firebaseio.com",
+    "project_id": "avahackathon18",
+    "storage_bucket": "avahackathon18.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:549186325856:android:fcc5fe40ef6a55ba",
+        "android_client_info": {
+          "package_name": "com.example.hanh.ava_hackathon18"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "549186325856-fea7eti3pukntvpsg3gh5bu2bvbnrcdc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hanh.ava_hackathon18",
+            "certificate_hash": "a2f2bc0117f171f5719a66250dd90a5a7a5e6126"
+          }
+        },
+        {
+          "client_id": "549186325856-hruc7gv10i4hv8hnrjqretsru1elau7b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChprUEjmaRxw8IQd2oHDGgjULfxtDJt3I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "549186325856-hruc7gv10i4hv8hnrjqretsru1elau7b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

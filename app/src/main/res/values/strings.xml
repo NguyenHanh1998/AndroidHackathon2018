@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Ava-Hackathon18</string>
+    <string name="edtplace">Enter Address, City or Zip Code</string>
+    <string name="actionDesti">Direction</string>
+    <string name="error_location_provider">Please check your GPS or Network</string>
+    <string name="tvTitle">Title</string>
+    <string name="tvSnippet">Snippet</string>
+</resources>
