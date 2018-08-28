@@ -12,6 +12,8 @@ import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,8 +27,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hanh.ava_hackathon18.adapter.CustomInfoWindowAdapter;
 import com.example.hanh.ava_hackathon18.adapter.PlaceAutocompleteAdapter;
 import com.example.hanh.ava_hackathon18.androidbase.BaseActivity;
+import com.example.hanh.ava_hackathon18.fragment.CalendarFragment;
 import com.example.hanh.ava_hackathon18.model.AnswerInsrtuct;
 import com.example.hanh.ava_hackathon18.model.EndLocation;
 import com.example.hanh.ava_hackathon18.model.Instruct;
@@ -66,6 +70,7 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -101,6 +106,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Double endLng;
     private MKLoader loader;
     private PlacePicker placePicker;
+    private LatLng start;
+    private LatLng end;
+
 
 
 
@@ -113,10 +121,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private AutoCompleteTextView edtDestination;
     @BindView(R.id.imgClearDesti)
     ImageView imgClear;
-    private ViewGroup layoutDirection;
+   // private ViewGroup layoutDirection;
     private ImageView imgDetail;
     private ImageView imgNear;
-
+    private FloatingActionButton imgDirection;
     private LocationListener locationListener = new LocationListener() {
         @SuppressLint("DefaultLocale")
         @Override
@@ -159,9 +167,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         edtDestination = (AutoCompleteTextView) findViewById(R.id.edtDesti);
         imgClear = (ImageView) findViewById(R.id.imgClearDesti);
-        layoutDirection = (ViewGroup) findViewById(R.id.layoutDirection);
+        imgDirection = (FloatingActionButton) findViewById(R.id.imgDirection);
         imgDetail = (ImageView) findViewById(R.id.imgShowDetail);
-        layoutDirection.setVisibility(View.GONE);
+        imgDirection.setVisibility(View.GONE);
         loader = (MKLoader) findViewById(R.id.loading);
         imgNear = (ImageView) findViewById(R.id.imgPlaceBynear);
         //local = new Local();
@@ -331,12 +339,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Toast.makeText(getApplicationContext(), "please get your location!", Toast.LENGTH_LONG).show();
                 return;
             } else {
-                layoutDirection.setVisibility(View.VISIBLE);
-                layoutDirection.setOnClickListener(new View.OnClickListener() {
+                imgDirection.setVisibility(View.VISIBLE);
+                imgDirection.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        LatLng start = new LatLng(location.getLatitude(), location.getLongitude());
-                        LatLng end = new LatLng(address.getLatitude(), address.getLongitude());
+                        start = new LatLng(location.getLatitude(), location.getLongitude());
+                        end = new LatLng(address.getLatitude(), address.getLongitude());
                         Log.i(TAG, "start: " + location.getLatitude() + location.getLongitude());
                         Log.i(TAG, "end : " + address.getLatitude() + address.getLongitude());
 
@@ -435,6 +443,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             rectLine.add(listGeopoints.get(i));
         }
         Polyline polylin = map.addPolyline(rectLine);
+
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        builder.include(start);
+        builder.include(end);
+        LatLngBounds bounds = builder.build();
+        map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 10));
     }
 
 //    protected void route(final LatLng sourcePosition, LatLng destPosition) {
@@ -565,6 +579,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Log.d(TAG, "moveCamera: moving camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 
+        map.setInfoWindowAdapter(new CustomInfoWindowAdapter(MainActivity.this));
         MarkerOptions options = new MarkerOptions()
                 .position(latLng)
                 .title(title);
@@ -587,7 +602,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         map.clear();
 
-        //map.setInfoWindowAdapter(new CustomInfoWindowAdapter(MainActivity.this));
+        map.setInfoWindowAdapter(new CustomInfoWindowAdapter(MainActivity.this));
         if (placeInfo != null) {
             String snippet = "Address: " + placeInfo.getAddress() + "\n"
                     + "Phone number: " + placeInfo.getPhoneNumber() + "\n"
@@ -603,7 +618,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             map.addMarker(new MarkerOptions().position(latLng));
         }
 
-        layoutDirection.setVisibility(View.VISIBLE);
+        imgDirection.setVisibility(View.VISIBLE);
         BaseActivity.hideSoftKeyboard(this);
     }
 
@@ -667,5 +682,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             places.release();
         }
     };
-}
 
+    @OnClick(R.id.bottom_setCalendar)
+    public void showCalendar() {
+        CalendarFragment fragment = CalendarFragment.newInstance();
+
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        if(fragmentManager != null) {
+            fragment.show(fragmentManager, "calendar fragment");
+        }
+    }
+
+}

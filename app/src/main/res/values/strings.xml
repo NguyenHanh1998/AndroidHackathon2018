@@ -1,8 +1,13 @@
 <resources>
-    <string name="app_name">Ava-Hackathon18</string>
-    <string name="edtplace">Enter Address, City or Zip Code</string>
-    <string name="actionDesti">Direction</string>
-    <string name="error_location_provider">Please check your GPS or Network</string>
+    <string name="app_name">Ava</string>
+    <string name="edtplace">Nhập địa chỉ, thành phố</string>
+    <string name="actionDesti">Tìm đường</string>
+    <string name="error_location_provider">Kiểm tra kết nối hoặc dịch vụ định vị trên điện thoại của bạn</string>
     <string name="tvTitle">Title</string>
     <string name="tvSnippet">Snippet</string>
+    <string name="title_setCalender">Đặt lịch</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

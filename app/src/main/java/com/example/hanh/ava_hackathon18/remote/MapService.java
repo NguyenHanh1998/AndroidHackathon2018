@@ -18,10 +18,10 @@ public interface MapService {
                         @Body java.util.Map local);
 
     @GET("/api/local")
-    Call<AnswerInsrtuct> getWaypoint(@Query("start_location_lat") Double startLocationlat,
-                                     @Query("start_location_lng") Double startLocationlng,
-                                     @Query("end_location_lat") Double endLocationlat,
-                                     @Query("end_location_lng") Double endLocationlng);
+    Call<AnswerInsrtuct> getWaypoint(@Query("start_lat") Double startLocationlat,
+                                     @Query("start_lng") Double startLocationlng,
+                                     @Query("end_lat") Double endLocationlat,
+                                     @Query("end_lng") Double endLocationlng);
 
 
 }

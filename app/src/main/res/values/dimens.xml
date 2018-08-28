@@ -23,5 +23,8 @@
     <dimen name="text_size_very_big">20sp</dimen>
     <dimen name="text_size_button_bottom">14sp</dimen>
 
+    <dimen name="bottom_bar_height">55dp</dimen>
+    <dimen name="button_bottom_height">45dp</dimen>
+    <dimen name="bottom_icon_size">24dp</dimen>
 
 </resources>

@@ -4,9 +4,13 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FFFFFF</color>
 
-    <color name="colorBackground">#ade21a</color>
+    <color name="colorBackground">#1a4fe2</color>
     <color name="colorTextDirection">#ade21a</color>
     <color name="black">#FF000000</color>
+    <color name="white">#FFFFFF</color>
     <color name="colorDirection">#31b3ef</color>
     <color name="colorJam">#ef5131</color>
+    <color name="color_text_black">#151515</color>
+    <color name="color_text_white">#ffffff</color>
+    <color name="color_text_blue">#1a4fe2</color>
 </resources>
