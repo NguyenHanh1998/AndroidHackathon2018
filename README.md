@@ -49,6 +49,7 @@ Connecting with Mlab
 # Quick start
     
 Run your app from the command line with:
+
     node index.js
 
 **Connect mongodb**
