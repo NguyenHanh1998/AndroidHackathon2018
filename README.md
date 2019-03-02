@@ -58,68 +58,68 @@ Run your app from the command line with:
 
 **Find the shortest way**
     
-```router.get('/local',(req,res)=>{
-    //console.log(req)
-    let start_lat = Number(req.query.start_lat)
-    let start_lng = Number(req.query.start_lng)
-    let end_lat = Number(req.query.end_lat)
-    let end_lng = Number(req.query.end_lng)
+    router.get('/local',(req,res)=>{
 
-    nearestPoint(start_lat,start_lng).then((idstart)=>{
-        nearestPoint(end_lat,end_lng).then((idend)=>{
-            createMap(Number(idstart),Number(idend)).then((route)=>{ 
-                console.log(route);
-                routeJson(route).then((step)=>{
-                    stepJson(step,route).then((astep)=>{
-                        //console.log(astep);
-                        res.json(astep);
-                    })                    
-                }) 
+        let start_lat = Number(req.query.start_lat)
+        let start_lng = Number(req.query.start_lng)
+        let end_lat = Number(req.query.end_lat)
+        let end_lng = Number(req.query.end_lng)
+
+        nearestPoint(start_lat,start_lng).then((idstart)=>{
+            nearestPoint(end_lat,end_lng).then((idend)=>{
+                createMap(Number(idstart),Number(idend)).then((route)=>{ 
+                    console.log(route);
+                    routeJson(route).then((step)=>{
+                        stepJson(step,route).then((astep)=>{
+                            //console.log(astep);
+                            res.json(astep);
+                        })                    
+                    }) 
+                })
             })
-        })
-    });    
+        });    
 
-    
-});```
+        
+    });
 
 
 **Update data from camera**
 
-```router.post('/maytram', async (req,res)=>{
+    router.post('/maytram', async (req,res)=>{
 
-    let all = String(req.body.all)
-    let line = all.split('\n')
+        let all = String(req.body.all)
+        let line = all.split('\n')
 
-    for (var i = 0; i < line.length; i++) {
-        let each = line[i].split('\t')
-        let id = each[0]
-        let startWaypointID = each[1]
-        let endWaypointID = each[2]
-        let distant = each[3]
-        let time = each[4]
+        for (var i = 0; i < line.length; i++) {
+            let each = line[i].split('\t')
+            let id = each[0]
+            let startWaypointID = each[1]
+            let endWaypointID = each[2]
+            let distant = each[3]
+            let time = each[4]
 
-        var mlway = new mlways({
-            _id: Number(id),
-            startWaypointID: Number(startWaypointID),
-            endWaypointID: Number(endWaypointID),
-            distant: Number(distant),
-            time: Number(time),
-        })
+            var mlway = new mlways({
+                _id: Number(id),
+                startWaypointID: Number(startWaypointID),
+                endWaypointID: Number(endWaypointID),
+                distant: Number(distant),
+                time: Number(time),
+            })
 
-        await mlways.update({"_id": Number(id)},
-                            {
-                                startWaypointID: Number(startWaypointID),
-                                endWaypointID: Number(endWaypointID),
-                                distant: Number(distant),
-                                time: Number(time),
-                            }, 
-                            function(err) {
-                                if (err) {
-                                    mlway.save()
-                                }
-                            })
-    }
+            await mlways.update({"_id": Number(id)},
+                                {
+                                    startWaypointID: Number(startWaypointID),
+                                    endWaypointID: Number(endWaypointID),
+                                    distant: Number(distant),
+                                    time: Number(time),
+                                }, 
+                                function(err) {
+                                    if (err) {
+                                        mlway.save()
+                                    }
+                                })
+        }
 
-    res.json(req.body)
-})```
+        res.json(req.body)
+    })
 
