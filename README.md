@@ -58,7 +58,7 @@ Run your app from the command line with:
 
 **Find the shortest way**
     
-    router.get('/local',(req,res)=>{
+    ```router.get('/local',(req,res)=>{
         //console.log(req)
         let start_lat = Number(req.query.start_lat)
         let start_lng = Number(req.query.start_lng)
@@ -80,12 +80,12 @@ Run your app from the command line with:
         });    
 
         
-    });
+    });```
 
 
 **Update data from camera**
 
-    router.post('/maytram', async (req,res)=>{
+    ```router.post('/maytram', async (req,res)=>{
 
         let all = String(req.body.all)
         let line = all.split('\n')
@@ -121,5 +121,5 @@ Run your app from the command line with:
         }
 
         res.json(req.body)
-    })
+    })```
 
